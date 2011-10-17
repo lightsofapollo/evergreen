@@ -45,6 +45,33 @@ module Evergreen
                 erb :list
               end
 
+              get '/spec/*' do |name|
+                @suite = Evergreen::Suite.new
+                @spec = @suite.get_spec(name)
+                content_type 'text/javascript'
+                begin
+                    @spec.read
+                rescue Exception => e
+                    <<JS
+                    describe("#{@spec.name}", function(){
+                        it("should not have server exceptions", function(){
+                            this.fail(Error('#{e.class.name} - #{e.to_s}'))
+                        });
+                    });
+JS
+                end
+              end
+
+              get '/template/*' do |name|
+                directory = File.expand_path(File.join(Evergreen.root, Evergreen.template_dir)) + '/' + name;
+
+                if(File.exist?(directory))
+                  File.read(directory)
+                else
+                  raise('Unknown test file "' + directory +'"');
+                end
+              end
+
               get '/run/all' do
                 @suite = Evergreen::Suite.new
                 @js_spec_helper = @suite.get_spec('spec_helper.js')

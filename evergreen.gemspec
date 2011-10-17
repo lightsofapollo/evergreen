@@ -30,6 +30,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("coffee-script")
 
   s.add_development_dependency('rspec', ['~> 2.0'])
-  s.add_development_dependency('capybara-webkit', ['>= 1.0.0.beta4'])
+  # s.add_development_dependency('capybara-webkit', ['>= 1.0.0.beta4'])
   s.add_development_dependency('therubyracer', ['~> 0.9'])
 end

@@ -6,17 +6,16 @@
   // <![CDATA[
       <%= render_spec(@coffee_spec_helper) if @coffee_spec_helper.exist? %>;
       <%= render_spec(@js_spec_helper) if @js_spec_helper.exist? %>;
-      <% if @spec %>
-        <%= render_spec(@spec) %>
-      <% else %>
-        <% @suite.specs.each do |spec| %>
-          describe("<%= spec.name %>", function() {
-            <%= render_spec(spec) %>;
-          });
-        <% end %>
-      <% end %>
   // ]]>
 </script>
+
+<% if @spec %>
+  <script src="/spec/<%= @spec.name %>" type="text/javascript" charset="utf-8"></script>
+<% else %>
+<% @suite.specs.each do |spec| %>
+    <script src="/spec/<%= spec.name %>" type="text/javascript" charset="utf-8"></script>
+<% end %>
+<% end %>
 
 <div id="page">
   <h1>Evergreen</h1>

@@ -8,7 +8,9 @@ module Evergreen
 
     def serve
       server.boot
-      Launchy.open(server.url(Evergreen.mounted_at.to_s + '/'))
+      server_url = server.url(Evergreen.mounted_at.to_s + '/')
+      Launchy.open(server_url)
+      puts "Launching server at: #{server_url}"
       sleep
     end
 
