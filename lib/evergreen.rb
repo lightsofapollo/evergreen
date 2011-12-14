@@ -15,7 +15,7 @@ module Evergreen
   autoload :Template, 'evergreen/template'
 
   class << self
-    attr_accessor :driver, :public_dir, :template_dir, :spec_dir, :root, :mounted_at
+    attr_accessor :driver, :public_dir, :template_dir, :spec_dir, :root, :mounted_at, :spec_glob
 
     def configure
       yield self
@@ -33,6 +33,7 @@ module Evergreen
         config.spec_dir = 'spec/javascripts'
         config.template_dir = 'spec/javascripts/templates'
         config.mounted_at = ""
+        config.spec_glob = '**/*_spec.{js,coffee}'
       end
     end
   end
